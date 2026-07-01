@@ -10,7 +10,7 @@
 <body>
   <header>
     <nav>
-      <h1>Section Champions</h1>
+      <h1>12E COUNSEL</h1>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="gallery.html">Gallery</a></li>
@@ -20,18 +20,18 @@
 
   <section class="gallery">
     <div class="photo-card" onclick="openModal('image1')">
-      <img src="image1.jpg" alt="Helping Hands">
-      <h1>Helping hands</h1>
+      <img src="image1.jpg" alt="Service">
+      <h1>Service</h1>
     </div>
 
     <div class="photo-card" onclick="openModal('image2')">
-      <img src="image2.jpg" alt="Street Adventure">
-      <h1>Adventure</h1>
+      <img src="image2.jpg" alt="Leadership">
+      <h1>Leadership</h1>
     </div>
 
     <div class="photo-card" onclick="openModal('image3')">
-      <img src="image3.jpg" alt="Class Unity">
-      <h1>Class Unity</h1>
+      <img src="image3.jpg" alt="Unity">
+      <h1>Unity</h1>
     </div>
 
     <div class="photo-card" onclick="openModal('image4')">
@@ -50,18 +50,19 @@
     </div>
 
     <div class="photo-card" onclick="openModal('image8')">
-      <img src="image8.jpg" alt="Solid Squad">
-      <h1>Solid Squad</h1>
+      <img src="image8.jpg" alt="Friendship">
+      <h1>Friendship</h1>
     </div>
 
     <div class="photo-card" onclick="openModal('image9')">
-      <img src="image9.jpg" alt="Dinner Celebration">
-      <h1>Lunch Celebration</h1>
+      <img src="image9.jpg" alt="Agape">
+      <h1>Agape</h1>
     </div>
   </section>
 
   <div id="modal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
+    <button class="modal-nav prev-btn" onclick="prevImage()">&lt;</button>
     <div class="modal-content">
       <img id="modal-img" src="" alt="">
       <div class="modal-text">
@@ -69,25 +70,29 @@
         <p id="modal-desc"></p>
       </div>
     </div>
+    <button class="modal-nav next-btn" onclick="nextImage()">&gt;</button>
   </div>
 
   <script>
+  const imageIds = ['image1', 'image2', 'image3', 'image4', 'image6', 'image7', 'image8', 'image9'];
+  let currentImageIndex = 0;
+
   const descriptions = {
-    image1: {title: "Helping Hands", desc: "A group of classmates gather in a chapel, surrounded by bags of donations, smiling as they work together. This moment reflects being service oriented and responsible, showing how teamwork and faith can turn small efforts into meaningful impact for the community."},
+    image1: {title: "Service", desc: "Classmates gather in the chapel with donations, smiling as they work together. Their teamwork shows social responsibility and faith in action, embodying the Christian call to care for others with love and purpose."},
 
-    image2: {title: "Adventure", desc: "Friends walk together down the street, laughing and enjoying the spontaneity of the day. It’s a carefree moment that highlights the joy of being truthful and genuine with one another, living responsibly while embracing the fun of being young."},
+    image2: {title: "Leadership", desc: "Leadership is about guiding others, working as a team, and setting a good example. This photo shows that every member plays an important role, and success comes from cooperation, trust, and responsibility. Together, we become stronger by supporting one another and working toward a common goal."},
 
-    image3: {title: "Class Unity", desc: "Inside the classroom, students sit together, sharing ideas and laughter. This scene reflects being hardworking and responsible, balancing fun with dedication to learning, and showing how unity makes challenges easier to face."},
+    image3: {title: "Unity", desc: "Inside the classroom, students sit together, sharing ideas and laughter. This scene reflects being hardworking and responsible, balancing fun with dedication to learning, and showing how unity makes challenges easier to face."},
 
     image4: {title: "Christmas Party", desc: "The section celebrates Christmas with decorations, food, and laughter. It’s a joyful gathering rooted in gratitude, reflecting a God‑fearing spirit and the value of fellowship, where kindness and service shine through in simple acts of sharing."},
     
-    image6: {title: "Fiesta Procession", desc: "Students join a lively procession, walking together in celebration of tradition. This moment connects to being truthful and service‑oriented, honoring culture with sincerity and showing respect for community responsibilities."},
+    image6: {title: "Fiesta Procession", desc: "Students join the parish procession, expressing lay participation in the Universal Church. Through active involvement in parish life—especially in the sacramental life and devotion to the Blessed Virgin Mary—they show unity, reverence, and commitment to the Church’s mission."},
 
     image7: {title: "Group Energy", desc: "Everyone poses together with loud cheers and playful gestures, radiating positivity. This picture reflects being hardworking and responsible, showing that energy and enthusiasm are just as important as perseverance in building strong bonds."},
 
-    image8: {title: "Solid Squad", desc: "Friends stand side by side, united and confident. This moment reflects truthfulness and responsibility, showing loyalty, honesty, and the strength of a group that supports one another through challenges."},
+    image8: {title: "Friendship", desc: "Friends stand side by side, united and confident. This moment reflects truthfulness and responsibility, showing loyalty, honesty, and the strength of a group that supports one another through challenges."},
 
-    image9: {title: "Lunch Celebration", desc: "Around a table filled with food, classmates laugh and share stories. This scene reflects a God‑fearing gratitude and a responsible fellowship, where sharing meals becomes a way to celebrate blessings and strengthen friendships."}
+    image9: {title: "Agape", desc: "Around a table filled with food, classmates laugh and share stories. This scene reflects a God‑fearing gratitude and a responsible fellowship, where sharing meals becomes a way to celebrate blessings and strengthen friendships."}
   };
 
   function openModal(id) {
@@ -96,12 +101,37 @@
     const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-desc');
 
+    currentImageIndex = imageIds.indexOf(id);
     modal.style.display = 'flex';
     modalImg.src = id + '.jpg';
     modalTitle.textContent = descriptions[id].title;
     modalDesc.textContent = descriptions[id].desc;
     document.body.classList.add('modal-open');
     document.documentElement.classList.add('modal-open');
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % imageIds.length;
+    const nextId = imageIds[currentImageIndex];
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+
+    modalImg.src = nextId + '.jpg';
+    modalTitle.textContent = descriptions[nextId].title;
+    modalDesc.textContent = descriptions[nextId].desc;
+  }
+
+  function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + imageIds.length) % imageIds.length;
+    const prevId = imageIds[currentImageIndex];
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+
+    modalImg.src = prevId + '.jpg';
+    modalTitle.textContent = descriptions[prevId].title;
+    modalDesc.textContent = descriptions[prevId].desc;
   }
 
   function closeModal() {
