@@ -293,14 +293,15 @@ header ul li a:hover {
   border-radius: 20px;
   overflow: hidden;
   width: 85%;
-  max-width: 1000px;
+  max-width: 100%;
   box-shadow: 0 20px 40px rgba(0,0,0,0.7);
 }
 
 .modal-content img {
   width: 50%;
-  object-fit: cover;
+  object-fit: contain;
   border-right: 3px solid #ff7b54;
+  background-color: #000;
 }
 
 .modal-text {
@@ -341,6 +342,35 @@ header ul li a:hover {
 
 .close:hover {
   color: #ff7b54;
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 123, 84, 0.8);
+  color: #fff;
+  border: none;
+  font-size: 35px;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+  z-index: 11;
+}
+
+.modal-nav:hover {
+  background-color: rgba(255, 123, 84, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+  left: 20px;
+}
+
+.next-btn {
+  right: 20px;
 }
 
 @media (max-width: 480px) {
@@ -397,6 +427,20 @@ header ul li a:hover {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
     font-size: 30px;
+  }
+
+  .modal-nav {
+    top: 50%;
+    padding: 10px 12px;
+    font-size: 24px;
+  }
+
+  .prev-btn {
+    left: 10px;
+  }
+
+  .next-btn {
+    right: 10px;
   }
 }
 
